@@ -111,6 +111,38 @@ public class CharacterTest {
     assertEquals(850, lowLevelChar.getHealth());
 }
 
+    @Test
+    @DisplayName("Test that the character's damage is adjusted by their attack range")
+    public void testDamageInRange() {
+        Character meleeChar = new Character();
+        meleeChar.setAttackRange(2);
+        Character rangedChar = new Character();
+        rangedChar.setAttackRange(20);
+
+        meleeChar.dealDamage(rangedChar, 100, 1);
+        assertEquals(900, rangedChar.getHealth());
+
+        meleeChar.dealDamage(rangedChar, 100, 3);
+        assertEquals(900, rangedChar.getHealth());
+
+        rangedChar.dealDamage(meleeChar, 100, 15);
+        assertEquals(900, meleeChar.getHealth());
+    }
+
+    @Test
+    @DisplayName("Test that the character's damage is adjusted by their ally status")
+    public void testAllyBehavior() {
+        Character char1 = new Character();
+        Character char2 = new Character();
+        char1.joinFaction("Guild");
+        char2.joinFaction("Guild");
+
+        char1.dealDamage(char2, 100, 1);
+        assertEquals(1000, char2.getHealth());
+
+        char1.heal(char2, 100);
+        assertEquals(1000, char2.getHealth());
+    }
 
 
 }
