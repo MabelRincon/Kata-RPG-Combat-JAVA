@@ -111,6 +111,22 @@ public class CharacterTest {
     assertEquals(850, lowLevelChar.getHealth());
 }
 
+    @Test
+    @DisplayName("Test that the character's damage is adjusted by their attack range")
+    public void testDamageInRange() {
+        Character meleeChar = new Character();
+        meleeChar.setAttackRange(2);
+        Character rangedChar = new Character();
+        rangedChar.setAttackRange(20);
 
+        meleeChar.dealDamage(rangedChar, 100, 1);
+        assertEquals(900, rangedChar.getHealth());
+
+        meleeChar.dealDamage(rangedChar, 100, 3);
+        assertEquals(900, rangedChar.getHealth());
+
+        rangedChar.dealDamage(meleeChar, 100, 15);
+        assertEquals(900, meleeChar.getHealth());
+    }
 
 }
