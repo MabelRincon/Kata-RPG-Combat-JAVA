@@ -8,9 +8,32 @@ public class Character {
     public int getHealth() {
         return health;
     }
+
+    public void setHealth(int health) {
+        if (health <= 0) {
+            this.health = 0;
+            this.alive = false;
+        } else if (health > 1000) {
+            this.health = 1000;
+        } else {
+            this.health = health;
+        }
+    }
+
     public int getLevel() {
         return level;
     }
+
+    public void setLevel(int level) {
+        if (level < 1) {
+            this.level = 1;
+        } else if (level > 30) {
+            this.level = 30;
+        } else {
+            this.level = level;
+        }
+    }
+
     public boolean isAlive() {
         return alive;
     }
