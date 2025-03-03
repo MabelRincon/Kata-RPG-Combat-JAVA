@@ -40,6 +40,11 @@ public class Character {
 
     public void dealDamage(Character target, int damage) {
         if (this != target && this.alive && target.isAlive()) {
+            if (this.level - target.getLevel() >= 5) {
+                damage *= 1.5;
+            } else if (target.getLevel()- this.level >= 5) {
+                damage *= 0.5;
+            }
             target.receiveDamage(damage);
         }
     }
