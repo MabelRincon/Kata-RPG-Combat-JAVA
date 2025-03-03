@@ -2,9 +2,6 @@ package dev.mabelrb.kata;
 
 import static org.junit.jupiter.api.Assertions.*;
 import  org.junit.jupiter.api.DisplayName;
-
-
-
 import org.junit.jupiter.api.Test;
 
 public class CharacterTest {
@@ -56,5 +53,64 @@ public class CharacterTest {
         character.setHealth(0);
         assertFalse(character.isAlive());
     }
+
+    @Test
+    @DisplayName("Test that the character can deal damage to another character")
+    public void testDealDamage() {
+        Character attacker = new Character();
+        Character target = new Character();
+
+        attacker.dealDamage(target, 200);
+        assertEquals(800, target.getHealth());
+    }
+
+    @Test
+    @DisplayName("Test that the character can heal another character")
+    public void testHeal() {
+        Character healer = new Character();
+        Character target = new Character();
+
+        healer.dealDamage(target, 200);
+        healer.heal(target, 100);
+        assertEquals(800, target.getHealth());
+
+        healer.heal(target,200);
+        assertEquals(800, target.getHealth());
+    }
+
+    @Test
+    @DisplayName("Test that the character cannot deal damage to itself")
+    public void testCannotDealDamageToSelf() {
+        Character character = new Character();
+        character.dealDamage(character, 100);
+        assertEquals(1000, character.getHealth());
+    }
+
+    @Test
+    @DisplayName("Test that the character cannot heal itself")
+    public void testOnlyHealSelf() {
+        Character character1 = new Character();
+        Character character2 = new Character();
+        character1.dealDamage(character2, 200);
+        character1.heal(character2, 100);
+        assertEquals(800, character2.getHealth());
+    }
+
+    @Test
+    @DisplayName("Test that the character's damage is adjusted by their level")
+    public void testDamageAdjustmentByLevel() {
+    Character lowLevelChar = new Character();
+    lowLevelChar.setLevel(1);
+    Character highLevelChar = new Character();
+    highLevelChar.setLevel(6);
+
+    lowLevelChar.dealDamage(highLevelChar, 100);
+    assertEquals(950, highLevelChar.getHealth());
+
+    highLevelChar.dealDamage(lowLevelChar, 100);
+    assertEquals(850, lowLevelChar.getHealth());
+}
+
+
 
 }
