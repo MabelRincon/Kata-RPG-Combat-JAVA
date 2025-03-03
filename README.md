@@ -5,7 +5,10 @@ Background This is a fun kata that has the programmer building simple combat rul
 
 ## Requiered
 
-- Minimum Java 17
+- TDD
+- 70% Test coverage
+  ![image](https://github.com/user-attachments/assets/463b3f37-4683-46d1-ac56-823a2ccf61ef)
+
 
 ## DevDependency
 
