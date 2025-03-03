@@ -2,8 +2,6 @@ package dev.mabelrb.kata;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.annotation.Target;
-
 import  org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
