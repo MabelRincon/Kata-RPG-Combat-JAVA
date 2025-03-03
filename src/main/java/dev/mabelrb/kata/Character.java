@@ -4,6 +4,15 @@ public class Character {
     private int health = 1000;
     private int level = 1;
     private boolean alive = true;
+    private int attackRange = 2;
+
+    public int getAttackRange() {
+        return attackRange;
+    }
+
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
+    }
 
     public int getHealth() {
         return health;
@@ -39,7 +48,11 @@ public class Character {
     }
 
     public void dealDamage(Character target, int damage) {
-        if (this != target && this.alive && target.isAlive()) {
+        dealDamage(target, damage,this.attackRange);
+    }
+
+    public void dealDamage(Character target, int damage, int distance) {
+        if (this != target && this.alive && target.isAlive() && distance <= this.attackRange) {
             if (this.level - target.getLevel() >= 5) {
                 damage *= 1.5;
             } else if (target.getLevel()- this.level >= 5) {
@@ -58,7 +71,7 @@ public class Character {
     }
 
     public void heal(Character target,int healAmount) {
-        if (target.alive) {
+        if (target == this && this.alive) {
             this.health = Math.min(1000, target.health + healAmount);
         }
     }
