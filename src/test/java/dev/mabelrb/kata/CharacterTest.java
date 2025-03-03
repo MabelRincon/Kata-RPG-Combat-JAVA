@@ -129,4 +129,20 @@ public class CharacterTest {
         assertEquals(900, meleeChar.getHealth());
     }
 
+    @Test
+    @DisplayName("Test that the character's damage is adjusted by their ally status")
+    public void testAllyBehavior() {
+        Character char1 = new Character();
+        Character char2 = new Character();
+        char1.joinFaction("Guild");
+        char2.joinFaction("Guild");
+
+        char1.dealDamage(char2, 100, 1);
+        assertEquals(1000, char2.getHealth());
+
+        char1.heal(char2, 100);
+        assertEquals(1000, char2.getHealth());
+    }
+
+
 }
