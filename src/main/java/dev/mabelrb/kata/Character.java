@@ -38,12 +38,24 @@ public class Character {
         return alive;
     }
 
-    public void dealDamage(int damage) {
-        setHealth(this.health - damage);
+    public void dealDamage(Character target, int damage) {
+        if (this != target && this.alive && target.isAlive()) {
+            target.receiveDamage(damage);
+        }
     }
 
-    public void heal(int amount) {
-        setHealth(this.health + amount);
+    private void receiveDamage(int damage) {
+        this.health -= damage;
+        if (this.health <= 0) {
+            this.health = 0;
+            this.alive = false;
+        }
+    }
+
+    public void heal(Character target,int healAmount) {
+        if (target.alive) {
+            this.health = Math.min(1000, target.health + healAmount);
+        }
     }
 
 }
