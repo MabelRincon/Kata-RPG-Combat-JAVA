@@ -1,6 +1,7 @@
 package dev.mabelrb.kata;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import  org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -138,11 +139,23 @@ public class CharacterTest {
         char2.joinFaction("Guild");
 
         char1.dealDamage(char2, 100, 1);
-        assertEquals(1000, char2.getHealth());
+        assertEquals(900, char2.getHealth());
 
         char1.heal(char2, 100);
-        assertEquals(1000, char2.getHealth());
+        assertEquals(900, char2.getHealth());
     }
+    @Test
+    @DisplayName("Test that the character's damage is adjusted by their ally status")
+    public void testNonCharacterTarget() {
+        Character char1 = new Character();
+        Target tree = new Target(2000);
 
+        char1.dealDamage(tree, 1000);
+        assertEquals(1000, tree.getHealth());
+        assertFalse(tree.isDestroyed());
 
+        char1.dealDamage(tree, 1000);
+        assertEquals(0, tree.getHealth());
+        assertTrue(tree.isDestroyed());
+    }
 }

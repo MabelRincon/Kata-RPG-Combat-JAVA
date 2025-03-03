@@ -19,6 +19,7 @@ public class Character {
     public void leaveFaction(String faction) {
         factions.remove(faction);
     }
+
     public boolean isAlly(Character character) {
         for (String faction : this.factions) {
             if (character.getfactions().contains(faction)) {
@@ -74,18 +75,22 @@ public class Character {
     }
 
     public void dealDamage(Character target, int damage) {
-        dealDamage(target, damage,this.attackRange);
+        dealDamage(target, damage, this.attackRange);
     }
 
     public void dealDamage(Character target, int damage, int distance) {
         if (this != target && this.alive && target.isAlive() && distance <= this.attackRange) {
             if (this.level - target.getLevel() >= 5) {
                 damage *= 1.5;
-            } else if (target.getLevel()- this.level >= 5) {
+            } else if (target.getLevel() - this.level >= 5) {
                 damage *= 0.5;
             }
             target.receiveDamage(damage);
         }
+    }
+
+    public void dealDamage(Target target, int damage) {
+        target.receiveDamage(damage);
     }
 
     private void receiveDamage(int damage) {
@@ -96,7 +101,7 @@ public class Character {
         }
     }
 
-    public void heal(Character target,int healAmount) {
+    public void heal(Character target, int healAmount) {
         if (target == this && this.alive) {
             this.health = Math.min(1000, target.health + healAmount);
         }
