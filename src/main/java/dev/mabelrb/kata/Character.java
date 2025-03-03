@@ -1,10 +1,36 @@
 package dev.mabelrb.kata;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Character {
     private int health = 1000;
     private int level = 1;
     private boolean alive = true;
     private int attackRange = 2;
+    private List<String> factions = new ArrayList<>();
+
+    public void joinFaction(String faction) {
+        if (!factions.contains(faction)) {
+            factions.add(faction);
+        }
+    }
+
+    public void leaveFaction(String faction) {
+        factions.remove(faction);
+    }
+    public boolean isAlly(Character character) {
+        for (String faction : this.factions) {
+            if (character.getfactions().contains(faction)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<String> getfactions() {
+        return factions;
+    }
 
     public int getAttackRange() {
         return attackRange;
