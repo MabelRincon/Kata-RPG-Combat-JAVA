@@ -57,4 +57,26 @@ public class CharacterTest {
         assertFalse(character.isAlive());
     }
 
+    @Test
+    @DisplayName("Test that the character can deal damage to another character")
+    public void testDealDamage() {
+        Character character = new Character();
+        character.dealDamage(200);
+        assertEquals(800, character.getHealth());
+        character.dealDamage(900);
+        assertEquals(0, character.getHealth());
+        assertFalse(character.isAlive());
+    }
+
+    @Test
+    @DisplayName("Test that the character can heal another character")
+    public void testHeal() {
+        Character character = new Character();
+        character.dealDamage(200);
+        character.heal(100);
+        assertEquals(900, character.getHealth());
+        character.heal(200);
+        assertEquals(1000, character.getHealth());
+    }
+
 }
