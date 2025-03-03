@@ -38,4 +38,12 @@ public class Character {
         return alive;
     }
 
+    public void dealDamage(int damage) {
+        setHealth(this.health - damage);
+    }
+
+    public void heal(int amount) {
+        setHealth(this.health + amount);
+    }
+
 }
